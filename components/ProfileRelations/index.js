@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Box from '../Box';
-import { GithubAPI } from '../../services';
 
 const ProfileRelationsBox = styled(Box)`
   ul {
@@ -54,37 +51,4 @@ const ProfileRelationsBox = styled(Box)`
   }
 `
 
-export const ProfileRelationsBoxWrapper = ({ title, login }) => {
-  const [ relations, setRelations ] = useState([]);
-  const emptyRelations = () => <div>No relation profiles found...</div>;
-  const renderProfile = profile => (
-    <li key={ profile.login }>
-      <a href={ profile.url } >
-        <img alt={ `profile image of ${ profile.login }` } src={ profile.avatar_url } />
-        <span>{ profile.login }</span>
-      </a>
-    </li>
-  );
-
-  useEffect( () => {
-    if ( relations?.length ) return
-
-    GithubAPI.followers( login ).then( json => setRelations( json ) );
-  }, [ setRelations ])
-
-  return (
-    <ProfileRelationsBox>
-      <h2 className="smallTitle">Pessoas relacionadas ({ relations.length })</h2>
-      {
-        relations?.length ?
-        <ul className="profile-relations">{ relations.map( renderProfile ) }</ul> :
-        emptyRelations()
-      }
-    </ProfileRelationsBox>
-  )
-}
-
-ProfileRelationsBoxWrapper.propTypes = {
-  login: PropTypes.string, //should be array of github login name
-}
-export default ProfileRelationsBoxWrapper;
+export default ProfileRelationsBox;
