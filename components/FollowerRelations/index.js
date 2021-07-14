@@ -21,8 +21,6 @@ export const FollowerRelations = ({ title, login }) => {
     GithubAPI.followers( login ).then( json => setRelations( json ) );
   }, [ login, setRelations ])
 
-  if ( ! login ) return null;
-
   return (
     <ProfileRelationsBox>
       <h2 className="smallTitle">Seguidores ({ relations.length })</h2>

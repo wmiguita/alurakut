@@ -16,12 +16,17 @@ import { GithubAPI } from '../services';
 export default function Home() {
   const [ githubLogin, setGithubLogin ] = useState( null );
   const [ user, setUser ] = useState( null );
+  const [ communities, setCommunities ] = useState( [] );
   const { handleSubmit, register } = useForm();
-  const getUser = form => GithubAPI.info( form.githubLogin ).then( u => setUser( u ) )
+  const handleUser = form => {
+    setGithubLogin( form.githubLogin );
+    GithubAPI.info( form.githubLogin ).then( u => setUser( u ) );
+  }
+  const addCommunity = community => setCommunities( [ ...communities, community ] );
 
   return (
     <>
-      <AlurakutMenu />
+      <AlurakutMenu githubUser={ user?.login } />
       <MainGrid>
         <div className="profileArea" style={{ gridArea: 'profileArea' }}>
           <ProfileSidebar user={ user } />
@@ -31,29 +36,30 @@ export default function Home() {
             { user ?
                 <h2 className="title">Bem-vinde(o/a) { user.login }</h2>
               : (
-                <form className="title" onSubmit={ handleSubmit( getUser ) }>
+                <form className="title" onSubmit={ handleSubmit( handleUser ) }>
                   Bem-vinde(o/a)
                   <input
                     { ...register( 'githubLogin' ) }
                     placeholder="Tecle login do github"
                     aria-label="Tecle login do github"
+                    type="text"
                   />
                   <button type="submit" disabled={ !!user }>OK</button>
                 </form>
               )
             }
             <OrkutNostalgicIconSet
-              confiavel={ Math.random() * 3 }
-              legal={ Math.random() * 3 }
-              sexy={ Math.random() * 3 }
+              confiavel={ 1 }
+              legal={ 2 }
+              sexy={ 3 }
             />
           </Box>
 
-          <WhatUWannaDo />
+          <WhatUWannaDo onAdd={ addCommunity } />
         </div>
         <div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
           <FollowerRelations login={ user?.login } />
-          <CommunityRelations communities={ [{ id: '0', name: 'teste', image_url: 'https://picsum.photos/200/300' }] } />
+          <CommunityRelations communities={ communities } />
         </div>
       </MainGrid>
     </>

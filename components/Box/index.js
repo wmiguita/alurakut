@@ -36,7 +36,8 @@ export const Box = styled.div`
     border-color: transparent;
     border-bottom-color: #ECF2FA;
   }
-  input {
+  input[type="text"],
+  input[type="password"] {
     width: 100%;
     background-color: #F4F4F4;
     color: #333333;
@@ -48,6 +49,19 @@ export const Box = styled.div`
       color: #333333;
       opacity: 1;
     }
+  }
+  label.radioLabel {
+    display: inline-block;
+    text-align: -webkit-match-parent;
+  }
+  label.radioLabel input[type="radio"] {
+    margin-top: 8px;
+    text-align: center;
+    width: 100%;
+  }
+  label.radioLabel img {
+    margin: 0 8px;
+    border-radius: 8px;
   }
   button {
     border: 0;

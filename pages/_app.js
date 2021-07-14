@@ -15,6 +15,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #__next {
+    display: flex;
+    min-height: 110vh;
+    flex-direction: column;
   }
 
   img {
