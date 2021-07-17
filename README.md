@@ -49,4 +49,8 @@ So authentication and leagues persistence are going to be with firebase
 - Thanks to Alura and Scuba the team for the wonderful support and material \o/
 - This project will not be updated further than 19/07/2021, cause you know, I' lazy =P
 - Está tudo em inglês meio zuado porque ¯\\_(ツ)_/¯
+- Code not within `src` because I came from gatsby file structure perspective :grimacing:
 
+## References
+- [NextJS on Github pages](https://blog.sallai.me/deploy-next-site-to-github-pages "Joe")
+- [Acessing GH env variables](https://stackoverflow.com/questions/53648652/how-to-use-environment-variables-in-github-page)

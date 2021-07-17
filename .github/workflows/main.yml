@@ -22,6 +22,12 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           GITHUB_TOKEN: ${{ secrets.ALURAKUT }}
+          FB_KEY: ${{ secrets.FB_KEY }}
+          FB_AUTH: ${{ secrets.FB_AUTH }}
+          FB_PID: ${{ secrets.FB_PID }}
+          FB_BUK: ${{ secrets.FB_BUK }}
+          FB_SND: ${{ secrets.FB_SND }}
+          FB_AID: ${{ secrets.FB_AID }}
           BRANCH: gh-pages
           FOLDER: out
           CLEAN: true

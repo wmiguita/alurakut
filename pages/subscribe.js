@@ -51,7 +51,7 @@ export default function SubscribeScreen() {
               type="password"
               autoComplete="false"
             />
-            <button type="submit">Login</button>
+            <button type="submit">Cadastrar</button>
           </form>
 
           <footer className="box">
