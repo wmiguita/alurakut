@@ -10,6 +10,10 @@ var config = {
   messagingSenderId: process.env.FB_SND,
   appId: process.env.FB_AID
 };
+
+console.debug( 'config:', config.appId )
+console.log( 'config:', config.appId )
+
 const COMMUNITIES = 'communities'
 
 let _singleton = null
