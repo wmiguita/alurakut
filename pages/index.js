@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
+
 import {
   Box,
   CommunityRelations,
@@ -7,23 +9,29 @@ import {
   MainGrid,
   ProfileSidebar,
   WhatUWannaDo,
-} from '../components';
+} from '../components'
+import { Firebase } from '../services'
+import { AlurakutMenu, OrkutNostalgicIconSet } from '../lib'
+import { GithubAPI } from '../services'
 
-import { AlurakutMenu, OrkutNostalgicIconSet } from '../lib';
-import { GithubAPI } from '../services';
-
-// color: ${({ theme }) => theme.colors.primary};
+// color: ${({ theme }) => theme.colors.primary}
 export default function Home() {
-  const [ githubLogin, setGithubLogin ] = useState( null );
-  const [ user, setUser ] = useState( null );
-  const [ communities, setCommunities ] = useState( [] );
-  const { handleSubmit, register } = useForm();
+  const [ githubLogin, setGithubLogin ] = useState( null )
+  const [ user, setUser ] = useState( null )
+  const [ communities, setCommunities ] = useState( [] )
+  const router = useRouter()
+  const { handleSubmit, register } = useForm()
   const handleUser = form => {
-    setGithubLogin( form.githubLogin );
-    GithubAPI.info( form.githubLogin ).then( u => setUser( u ) );
+    setGithubLogin( form.githubLogin )
+    GithubAPI.info( form.githubLogin ).then( u => setUser( u ) )
   }
-  const addCommunity = community => setCommunities( [ ...communities, community ] );
+  const addCommunity = community => setCommunities( [ ...communities, community ] )
 
+  useEffect( () => {
+    Firebase.setAuthChangeListener( user => {
+      if( ! user ) router.push( '/login' )
+    })
+  }, [])
   return (
     <>
       <AlurakutMenu githubUser={ user?.login } />
@@ -64,5 +72,5 @@ export default function Home() {
       </MainGrid>
     </>
   )
-};
+}
 
