@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 
-import { Link } from '../lib/AlurakutCommons';
-import { Firebase } from '../services';
+import { HeromunityLib, Link } from '../lib'
+import { Firebase } from '../services'
 
 export default function SubscribeScreen() {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register } = useForm()
   const router = useRouter()
   const handleSub = form => {
-    console.debug( 'pages.login handleSub', form, Firebase )
+    const { githubUser, password } = form
+    const email = HeromunityLib.email( githubUser )
 
-    Firebase.subscribe( form )
+    Firebase.subscribe({ email, password })
+      .catch( e => console.error( e ) )
   }
 
   useEffect( () => {
@@ -37,9 +39,9 @@ export default function SubscribeScreen() {
               Cadastre agora o email que quiser (identidade secreta ou heróico)
             </p>
             <input
-              { ...register( "email" ) }
-              placeholder="Email"
-              aria-label="Email"
+              { ...register( "githubUser" ) }
+              placeholder="Github login"
+              aria-label="Github login"
               type="text"
             />
             <input

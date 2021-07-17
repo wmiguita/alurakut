@@ -2,17 +2,18 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 
-import { Link } from '../lib/AlurakutCommons'
+import { Link, HeromunityLib } from '../lib'
 import { Firebase } from '../services'
 
 export default function LoginScreen({ isAuth }) {
   const { handleSubmit, register } = useForm()
   const router = useRouter()
   const handleLogin = form => {
-    Firebase.login( form )
-    .then()
-    .catch( e => console.debug( e ) )
-    .finally()
+    const { githubUser, password } = form
+    const email = HeromunityLib.email( githubUser )
+
+    Firebase.login({ email, password })
+      .catch( e => console.error( e ) )
   }
 
   useEffect( () => {
@@ -36,9 +37,9 @@ export default function LoginScreen({ isAuth }) {
               Acesse agora mesmo com seu usuário que você cadastrou!
             </p>
             <input
-              { ...register( "email" ) }
-              placeholder="Email"
-              aria-label="Email"
+              { ...register( "githubUser" ) }
+              placeholder="Github login"
+              aria-label="Github login"
               type="text"
             />
             <input

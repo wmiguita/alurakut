@@ -11,51 +11,56 @@ import {
   WhatUWannaDo,
 } from '../components'
 import { Firebase } from '../services'
-import { AlurakutMenu, OrkutNostalgicIconSet } from '../lib'
+import { AlurakutMenu, HeromunityLib, OrkutNostalgicIconSet } from '../lib'
 import { GithubAPI } from '../services'
 
 // color: ${({ theme }) => theme.colors.primary}
 export default function Home() {
-  const [ githubLogin, setGithubLogin ] = useState( null )
   const [ user, setUser ] = useState( null )
+  const githubUser = HeromunityLib.githubUser( user?.email )
   const [ communities, setCommunities ] = useState( [] )
   const router = useRouter()
   const { handleSubmit, register } = useForm()
-  const handleUser = form => {
-    setGithubLogin( form.githubLogin )
-    GithubAPI.info( form.githubLogin ).then( u => setUser( u ) )
+  const addCommunity = async form => {
+    form.owner = user.uid // CODE CRITIQUE: dirt here
+    Firebase.createCom( form )
   }
-  const addCommunity = community => setCommunities( [ ...communities, community ] )
 
   useEffect( () => {
-    Firebase.setAuthChangeListener( user => {
-      if( ! user ) router.push( '/login' )
+    return Firebase.setAuthChangeListener( user => {
+      if( ! user ) {
+        setUser( null )
+        router.push( '/login' )
+      } else {
+        setUser( user )
+      }
+
     })
-  }, [])
+  }, [ setUser ])
+
+  useEffect( () => {
+    if( ! user ) return
+
+    return Firebase.listCom( user.uid ).get()
+      .then( snap => {
+        let communities = []
+
+        snap.forEach( c => communities.push( { id: c.id, ...c.data() } ) )
+
+        setCommunities( communities )
+      })
+  }, [ user, setCommunities ])
+
   return (
     <>
-      <AlurakutMenu githubUser={ user?.login } />
+      <AlurakutMenu githubUser={ githubUser } />
       <MainGrid>
         <div className="profileArea" style={{ gridArea: 'profileArea' }}>
-          <ProfileSidebar user={ user } />
+          <ProfileSidebar githubUser={ githubUser } />
         </div>
         <div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>
           <Box>
-            { user ?
-                <h2 className="title">Bem-vinde(o/a) { user.login }</h2>
-              : (
-                <form className="title" onSubmit={ handleSubmit( handleUser ) }>
-                  Bem-vinde(o/a)
-                  <input
-                    { ...register( 'githubLogin' ) }
-                    placeholder="Tecle login do github"
-                    aria-label="Tecle login do github"
-                    type="text"
-                  />
-                  <button type="submit" disabled={ !!user }>OK</button>
-                </form>
-              )
-            }
+            <h2 className="title">Bem-vinde(o/a) { githubUser }</h2>
             <OrkutNostalgicIconSet
               confiavel={ 1 }
               legal={ 2 }
@@ -66,7 +71,7 @@ export default function Home() {
           <WhatUWannaDo onAdd={ addCommunity } />
         </div>
         <div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
-          <FollowerRelations login={ user?.login } />
+          <FollowerRelations login={ githubUser } />
           <CommunityRelations communities={ communities } />
         </div>
       </MainGrid>
@@ -74,3 +79,34 @@ export default function Home() {
   )
 }
 
+// export async function getServerSideProps( context ) {
+//   let uid = false
+//   let storedCommunities = []
+// 
+//   return new Promise( function( res, rej ) {
+//     return Firebase.setAuthChangeListener( async function( user ) {
+//       console.debug( 'pages.index.getServerSideProps onAuthChanged', user )
+//       if( ! user )
+//         return res( { props: { uid, storedCommunities } } )
+// 
+//       uid = user.id
+//       storedCommunities = await Firebase.listCom( user.uid )
+// 
+//       return res( { props: { uid, storedCommunities } } )
+//     })
+//   })
+// 
+//   console.debug( 'pages.index.getServerSideProps'  )
+//   // const cleanAuth = Firebase.setAuthChangeListener( async function( user ) {
+//   //   if ( user ) {
+//   //     uid = user.uid
+//   //     storedCommunities = await Firebase.listCom( user.uid )
+// 
+//   //     if( ! storedCommunities ) storedCommunities = []
+// 
+//   //     console.debug( 'pages.index.getServerSideProps storedCommunities', storedCommunities )
+//   //   }
+//   // })
+// 
+//   // return { props: { uid, storedCommunities } }
+// }

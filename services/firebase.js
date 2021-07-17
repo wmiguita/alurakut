@@ -10,6 +10,7 @@ var config = {
   messagingSenderId: process.env.FB_SND,
   appId: process.env.FB_AID
 };
+const COMMUNITIES = 'communities'
 
 let _singleton = null
 
@@ -42,13 +43,25 @@ class FirebaseAPI {
   }
 
   setAuthChangeListener( handlerAuthChange ) {
-    this.auth.onAuthStateChanged( handlerAuthChange )
+    return this.auth.onAuthStateChanged( handlerAuthChange )
   }
 
   createCom( form ) {
+    const communities = this.db.collection( COMMUNITIES )
+    form.users = [ form.owner ] // CODE CRITIQUE: dirt here
+
+    return communities.add( form )
   }
 
   delCom( comId ) {
+    const community = this.db.collection( COMMUNITIES ).doc( comId )
+
+    return community.delete()
+  }
+
+  listCom( uid ) {
+    const communities = this.db.collection( COMMUNITIES )
+    return communities.where( "users", "array-contains", uid )
   }
 }
 

@@ -1,6 +1,5 @@
 import React, { createRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { v4 as uuidv4 } from 'uuid';
 
 import { Box } from '../';
 
@@ -15,7 +14,6 @@ export const WhatUWannaDo = ({ onAdd }) => {
     reset();
 
     return onAdd({
-      id: uuidv4(),
       name: data.communityName,
       image_url: data.communityImage,
     });
