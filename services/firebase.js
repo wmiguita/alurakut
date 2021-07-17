@@ -11,9 +11,6 @@ var config = {
   appId: process.env.FB_AID
 };
 
-console.debug( 'debug config:', config.appId )
-console.log( 'log config:', config.appId )
-
 const COMMUNITIES = 'communities'
 
 let _singleton = null
