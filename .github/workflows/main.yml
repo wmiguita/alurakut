@@ -22,6 +22,7 @@ jobs:
           FB_AID: ${{ secrets.FB_AID }}
 
         run: |
+          echo "$FD_AUTH"
           npm ci
           npm run build
           touch ./out/.nojekyll
