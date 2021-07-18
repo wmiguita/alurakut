@@ -10,8 +10,8 @@ import * as yup from "yup";
 
 const initialImgOpts = [ 1000, 2000, 3000 ]
 const schema = yup.object().shape({
-  name: yup.string().required( 'Nome é obrigatório' ),
-  image_url: yup.string().required( 'Escolha uma imagem' ).nullable(),
+  name: yup.string().required( 'Nome da liga é obrigatório' ),
+  image_url: yup.string().required( 'Escolha uma imagem para a liga' ).nullable(),
 });
 
 export const WhatUWannaDo = ({ ownerId }) => {
@@ -45,8 +45,6 @@ export const WhatUWannaDo = ({ ownerId }) => {
 
     setImgOpts([ randSeed(), randSeed(), randSeed() ])
   }
-
-  console.debug( 'components.WhatUWannaDo errors', errors )
 
   return (
     <Box>
