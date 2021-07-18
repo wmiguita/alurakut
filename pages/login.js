@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 
@@ -6,14 +6,17 @@ import { Link, HeromunityLib } from '../lib'
 import { Firebase } from '../services'
 
 export default function LoginScreen({ isAuth }) {
-  const { handleSubmit, register } = useForm()
+  const [ submitting, setSubmitting ] = useState( false )
+  const { formState: { errors }, handleSubmit, register, setError } = useForm()
   const router = useRouter()
   const handleLogin = form => {
     const { githubUser, password } = form
     const email = HeromunityLib.email( githubUser )
 
+    setSubmitting( true )
     Firebase.login({ email, password })
-      .catch( e => console.error( e ) )
+      .catch( e => alert( e.message ) )
+      .finally( () => setSubmitting( false ) )
   }
 
   useEffect( () => {
@@ -49,7 +52,7 @@ export default function LoginScreen({ isAuth }) {
               type="password"
               autoComplete="false"
             />
-            <button type="submit">Login</button>
+            <button type="submit" disabled={ submitting }>Login</button>
           </form>
 
           <footer className="box">

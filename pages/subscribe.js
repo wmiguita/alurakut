@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 
@@ -6,14 +6,17 @@ import { HeromunityLib, Link } from '../lib'
 import { Firebase } from '../services'
 
 export default function SubscribeScreen() {
+  const [ submitting, setSubmitting ] = useState( false )
   const { handleSubmit, register } = useForm()
   const router = useRouter()
   const handleSub = form => {
     const { githubUser, password } = form
     const email = HeromunityLib.email( githubUser )
 
+    setSubmitting( true )
     Firebase.subscribe({ email, password })
-      .catch( e => console.error( e ) )
+      .catch( e => alert( e.message ) )
+      .finally( () => setSubmitting( false ) )
   }
 
   useEffect( () => {
@@ -51,7 +54,7 @@ export default function SubscribeScreen() {
               type="password"
               autoComplete="false"
             />
-            <button type="submit">Cadastrar</button>
+            <button type="submit" disabled={ submitting }>Cadastrar</button>
           </form>
 
           <footer className="box">
