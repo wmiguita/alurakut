@@ -10,5 +10,8 @@ module.exports = {
     FB_BUK: process.env.FB_BUK,
     FB_SND: process.env.FB_SND,
     FB_AID: process.env.FB_AID
+  },
+  images: {
+    domains: [ 'raw.githubusercontent.com' ]
   }
 };
