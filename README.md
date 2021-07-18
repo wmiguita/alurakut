@@ -50,11 +50,11 @@ So authentication and leagues persistence are going to be with firebase
 - This project will not be updated further than 19/07/2021, cause you know, I' lazy =P
 - Está tudo em inglês meio zuado porque ¯\\_(ツ)_/¯
 - Code not within `src` because I came from gatsby file structure perspective :grimacing:
-- Another bite from the past, GH doesn't have image optimizationn
+- ---Another bite from the past, GH doesn't have image optimization---
 
 ## References
 - [NextJS on Github pages](https://blog.sallai.me/deploy-next-site-to-github-pages "Joe")
 - [Acessing GH env variables](https://stackoverflow.com/questions/53648652/how-to-use-environment-variables-in-github-page)
 - [Open Comic Font](https://fontesk.com/open-comic-font/ "Arthur Reeder")
 - [Comic Logo generator](https://www.flamingtext.com/logo/Design-Comics "FlamingText")
-- [Image Optimization](https://github.com/cyrilwanner/next-optimized-images "next-optimized-images")
+- ---[Image Optimization](https://github.com/cyrilwanner/next-optimized-images "next-optimized-images")---

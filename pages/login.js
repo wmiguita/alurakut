@@ -66,7 +66,9 @@ export default function LoginScreen({ isAuth }) {
 
         <footer className="footerArea">
           <p>
-            © 2021 alura.com.br - <a href="/">Sobre o Orkut.br</a> - <a href="/">Centro de segurança</a> - <a href="/">Privacidade</a> - <a href="/">Termos</a> - <a href="/">Contato</a>
+            <strike>
+              © 2021 alura.com.br - <a href="/">Sobre o Orkut.br</a> - <a href="/">Centro de segurança</a> - <a href="/">Privacidade</a> - <a href="/">Termos</a> - <a href="/">Contato</a>
+            </strike>
           </p>
         </footer>
       </div>
