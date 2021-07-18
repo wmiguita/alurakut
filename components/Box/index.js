@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Box = styled.div`
-  background: #FFFFFF;
+  background: var( --backgroundTertiary );
   border-radius: 8px;
   overflow: auto;
   padding: 16px;
@@ -9,7 +9,7 @@ export const Box = styled.div`
   margin-bottom: 10px;
   .boxLink {
     font-size: 14px;
-    color: #2E7BB4;
+    color: var( --textQuarternaryColor );
     text-decoration: none;
     font-weight: 800;
   }
@@ -66,9 +66,9 @@ export const Box = styled.div`
   button {
     border: 0;
     padding: 8px 12px;
-    color: #FFFFFF;
+    color: var( --textPrimaryColor );
     border-radius: 10000px;
-    background-color: #6F92BB;
+    background-color: var( --colorPrimary );
   }
 `
 

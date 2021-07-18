@@ -3,15 +3,28 @@ import { AlurakutStyles } from '../lib/AlurakutCommons'
 
 const GlobalStyle = createGlobalStyle`
   /* reset CSS */
+  /*
+    Colors: https://coolors.co/540d6e-ee4266-ffd23f-f3fcf0-1f271b
+    540d6e purple
+    ee4266 pink
+    ffd23f yellow
+    f3fcf0 white
+    1f271b pine tree? mossy green
+  */
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
+  @font-face {
+    font-family: 'Open Comic';
+    src: url("fonts/OpenComicFont.ttf");
+  }
+
   body {
-    background-color: #d9e6f6;
-    font-family: 'Comic Sans', sans-serif;
+    background-color: var( --backgroundPrimary );
+    font-family: 'Open Comic', 'Comic Sans', sans-serif;
   }
 
   #__next {
