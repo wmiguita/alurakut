@@ -27,7 +27,7 @@ export default function LoginScreen({ isAuth }) {
       <div className="loginScreen">
         <section className="logoArea">
           <p><strong>Conecte-se</strong> aos seus super amigos e familiares usando recados e mensagens instantâneas</p>
-          <p><strong>Conheça</strong> novas pessoas através de amigos de seus super amigos e comunidades</p>
+          <p><strong>Conheça</strong> novas pessoas através de amigos de seus super amigos e ligas</p>
           <p><strike><strong>Compartilhe</strong> seus vídeos, fotos e paixões em um só lugar</strike></p>
         </section>
 

@@ -32,12 +32,12 @@ export const WhatUWannaDo = ({ onAdd }) => {
           <input
             { ...register( 'communityName' ) }
             type="text"
-            placeholder="Qual o nome da comunidade para ser criada?"
-            aria-label="Qual o nome da comunidade para ser criada?"
+            placeholder="Qual o nome da liga para ser criada?"
+            aria-label="Qual o nome da liga para ser criada?"
           />
         </div>
         <div>
-          <h3 className="smallTitle">Qual a imagem que melhor representa a comunidade?</h3>
+          <h3 className="smallTitle">Qual a imagem que melhor representa a liga?</h3>
         </div>
           { imgOpts.map( img => {
               const src = `https://picsum.photos/seed/${ img }/100/100`;
@@ -58,7 +58,7 @@ export const WhatUWannaDo = ({ onAdd }) => {
           }
         <a onClick={ changeOptions }>Trocar imagens</a>
         <br />
-        <button type="submit">Criar comunidade</button>
+        <button type="submit">Criar liga</button>
       </form>
     </Box>
   )

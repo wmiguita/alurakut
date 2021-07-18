@@ -4,7 +4,7 @@ import ProfileRelationsBox from '../ProfileRelations';
 import { GithubAPI } from '../../services';
 
 export const CommunityRelations = ({ communities }) => {
-  const emptyCommunities = () => <div>Sem comunidades......ainda ;D</div>;
+  const emptyCommunities = () => <div>Sem liga... ainda ;D</div>;
   const renderCommunity = community => (
     <li key={ community.id }>
       <a href={ community.url } >
@@ -16,7 +16,7 @@ export const CommunityRelations = ({ communities }) => {
 
   return (
     <ProfileRelationsBox>
-      <h2 className="smallTitle">Comunidades ({ communities.length })</h2>
+      <h2 className="smallTitle">Ligas ({ communities.length })</h2>
       {
         communities?.length ?
         <ul className="communities-relations">{ communities.map( renderCommunity ) }</ul> :

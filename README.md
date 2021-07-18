@@ -54,3 +54,5 @@ So authentication and leagues persistence are going to be with firebase
 ## References
 - [NextJS on Github pages](https://blog.sallai.me/deploy-next-site-to-github-pages "Joe")
 - [Acessing GH env variables](https://stackoverflow.com/questions/53648652/how-to-use-environment-variables-in-github-page)
+- [Open Comic Font](https://fontesk.com/open-comic-font/ "Arthur Reeder")
+- [Comic Logo generator](https://www.flamingtext.com/logo/Design-Comics "FlamingText")
