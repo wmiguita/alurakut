@@ -70,6 +70,12 @@ export const Box = styled.div`
     border-radius: 10000px;
     background-color: var( --colorPrimary );
   }
+
+  ul.errors {
+    color: var( --colorQuarternary );
+    list-style: none;
+    margin: 8px 0;
+  }
 `
 
 export default Box

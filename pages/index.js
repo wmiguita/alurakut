@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
+import { Firebase } from '../services'
+
 import {
   Box,
   CommunityRelations,
@@ -10,7 +12,6 @@ import {
   ProfileSidebar,
   WhatUWannaDo,
 } from '../components'
-import { Firebase } from '../services'
 import { AlurakutMenu, HeromunityLib, OrkutNostalgicIconSet } from '../lib'
 import { GithubAPI } from '../services'
 
@@ -21,10 +22,6 @@ export default function Home() {
   const [ communities, setCommunities ] = useState( [] )
   const router = useRouter()
   const { handleSubmit, register } = useForm()
-  const addCommunity = async form => {
-    form.owner = user.uid // CODE CRITIQUE: dirt here
-    Firebase.createCom( form )
-  }
 
   useEffect( () => {
     return Firebase.setAuthChangeListener( user => {
@@ -41,8 +38,7 @@ export default function Home() {
   useEffect( () => {
     if( ! user ) return
 
-    return Firebase.listCom( user.uid ).get()
-      .then( snap => {
+    return Firebase.listCom( user.uid ).onSnapshot( snap => {
         let communities = []
 
         snap.forEach( c => communities.push( { id: c.id, ...c.data() } ) )
@@ -68,7 +64,7 @@ export default function Home() {
             />
           </Box>
 
-          <WhatUWannaDo onAdd={ addCommunity } />
+          <WhatUWannaDo ownerId={ user?.uid }/>
         </div>
         <div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
           <FollowerRelations login={ githubUser } />

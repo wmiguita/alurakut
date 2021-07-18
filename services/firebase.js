@@ -52,6 +52,10 @@ class FirebaseAPI {
     form.users = [ form.owner ] // CODE CRITIQUE: dirt here
 
     return communities.add( form )
+      .then( docRef => Promise.resolve({
+        id: docRef.id,
+        ...form // CODE CRITIQUE: firestore doesn't return
+      }))
   }
 
   delCom( comId ) {
