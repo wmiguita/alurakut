@@ -82,7 +82,7 @@ export const WhatUWannaDo = ({ ownerId }) => {
         <br />
         <button type="submit" disabled={ submitting }>Criar liga</button>
         <ul className="errors">
-          { [ 'name', 'image_url' ].map( field => <li>{ errors[ field ]?.message }</li> ) }
+          { [ 'name', 'image_url' ].map( ( field, i ) => <li key={ i }>{ errors[ field ]?.message }</li> ) }
         </ul>
       </form>
     </Box>
